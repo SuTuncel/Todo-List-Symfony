@@ -1,0 +1,53 @@
+name: CI process for Todo-List
+
+on: 
+  push:
+    branches:
+      - master
+
+env: 
+  APP_ENV: dev
+  APP_SECRET: 82a20c2692af704e816c6a58b86ce548
+
+jobs: 
+  symfony: 
+    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php-versions: ['8.1']
+    services:
+      mysql:
+        image: mariadb:10.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: todoapp
+        ports:
+        - 3306/tcp
+        - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+    
+      - name: Setup PHP 8.1
+        uses: shivammathur/setup-php@2.21.1
+        env:
+          runner: self-hosted
+        with: 
+          php-version: '8.1'
+          tools: composer, phpunit
+          extensions: mbstring, xml, ctype, iconv, intl, mysql, dom, filter, json, pdo, pdo_mysql
+          
+      - name: Check PHP Version
+        run: php -v
+        
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v2
+
+      - name: Install RequirementChecker Composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+            working-directory: 'requirement-checker'
