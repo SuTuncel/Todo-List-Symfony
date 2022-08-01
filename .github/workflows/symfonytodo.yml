@@ -64,9 +64,12 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
-          
-      - name: Run Server
-        run: php bin/console server:run
+    
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v3
+
+      - name: Start test server
+        run: docker-compose up -d main-server
         
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
