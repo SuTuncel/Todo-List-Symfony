@@ -65,8 +65,8 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
-      - name: Run Unit and Functional tests
-        run: php bin/phpunit
+      - name: Run Unit tests
+        run: php bin/phpunit tests/TaskTodoTest.php
       
         
 
