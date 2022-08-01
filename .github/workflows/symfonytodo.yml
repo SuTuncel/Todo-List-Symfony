@@ -65,12 +65,17 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
     
-        
+      - name: Run Server
+        uses: Eun/http-server-action@v1.0.3
+        with: 
+          port: 8080
+          run: curl -vvvv http://todoapp.test/index.php/
+          
       - name: Run Unit tests
-        run: C:\laragon\www\todoapp>php bin/phpunit tests/TaskTodoTest.php
+        run: php bin/phpunit tests/TaskTodoTest.php
       
       - name: Run Functional tests
-        run: C:\laragon\www\todoapp>php bin/phpunit tests/Controller/TodoControllerTest.php
+        run: php bin/phpunit tests/Controller/TodoControllerTest.php
       
         
 
