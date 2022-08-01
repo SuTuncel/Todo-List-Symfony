@@ -57,4 +57,12 @@ jobs:
         
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
+        
+      - name: Run Migraiton
+        run: |
+          composer require --dev symfony/orm-pack
+          php bin/console doctrine:schema:update --force || echo "schema update failed"
+          php bin/console doctrine:migrations:migrate || echo "migration failed"
+        env:
+          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
 
