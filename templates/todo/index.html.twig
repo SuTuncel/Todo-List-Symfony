@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome Todo-List{% endblock %}
+
+{% block body %}
+    <div class="head">
+        <h1>Todo-List Application</h1>
+    </div>
+    <div class="form_style">
+        <form method="POST" action="{{path('app_create_task')}}">
+            <p class="string"><label>Enter a new task:</label></p>
+            <input type="text" name="task" class="input">
+            <p><button class="button" name="submit" value="add Task">Add Task</button></p>
+        </form>
+
+        <ul class="list_style">
+            {% for task in tasktodo %}
+            <li {% if task.status %} class="tit_after" {% endif %}>
+                <a class= tit href="{{path('app_change_status',{'id': task.id})}}">
+                    {{ task.title }}</a>
+                <a class="close" onclick="return confirm('Deleting...')" href="{{ path('app_task_delete', {'id': task.id}) }}">X</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

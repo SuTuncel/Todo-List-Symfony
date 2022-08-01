@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Hello!{% endblock %}</title>
+        <style>
+
+            .head {
+                text-align: center;
+                color: cornflowerblue;
+            }
+            .form_style{
+                text-align: center;
+            }
+            .input{
+                width: 350px;
+            }
+            .string {
+                color: hotpink}
+            .button{
+                background: whitesmoke;
+                color: gray;
+            }
+            .list_style{
+                list-style-type: none;
+
+            }
+            .tit{
+                text-decoration: none;
+                margin-right: 50px;
+                color: hotpink;
+            }
+            .tit_after {
+               text-decoration: line-through;
+            }
+            .close{
+                text-decoration: none;
+                color: #999999;
+            }
+
+        </style>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>
