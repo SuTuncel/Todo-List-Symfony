@@ -68,8 +68,9 @@ jobs:
       - name: Run Server
         uses: Eun/http-server-action@v1.0.3
         with:
-          port: 80
-          run: http://todoapp.test/index.php/
+          port: 8080
+          no-cache: false
+        run: http://todoapp.test/index.php/
           
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
