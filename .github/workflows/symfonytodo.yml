@@ -64,6 +64,29 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
+          
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        id: yarn-cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-cache-node-modules-
+
+      - name: Yarn install
+        if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Yarn build
+        run: yarn run encore production
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: public/build
+
     
       - name: Run Server
         uses: Eun/http-server-action@v1
