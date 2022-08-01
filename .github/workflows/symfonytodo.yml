@@ -68,9 +68,8 @@ jobs:
       - name: Run Server
         uses: Eun/http-server-action@v1.0.3
         with:
-          directory: ${{ github.workspace }}
-          port: 8080
-          run: curl -vvvv http://todoapp.test/index.php/
+          port: 80
+          run: http://todoapp.test/index.php/
           
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
