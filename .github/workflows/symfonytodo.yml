@@ -58,24 +58,19 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
         
-      - name: Run Migraiton
+      - name: Run Migration
         run: |
           composer require --dev symfony/orm-pack
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
     
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v3
-
-      - name: Start test server
-        run: docker-compose up -d main-server
         
       - name: Run Unit tests
-        run: php bin/phpunit tests/TaskTodoTest.php
+        run: C:\laragon\www\todoapp>php bin/phpunit tests/TaskTodoTest.php
       
       - name: Run Functional tests
-        run: php bin/phpunit tests/Controller/TodoControllerTest.php
+        run: C:\laragon\www\todoapp>php bin/phpunit tests/Controller/TodoControllerTest.php
       
         
 
