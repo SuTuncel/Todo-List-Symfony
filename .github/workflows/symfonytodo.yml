@@ -44,10 +44,17 @@ jobs:
       - name: Check PHP Version
         run: php -v
         
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3.0.5
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+        
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
 
-      - name: Install RequirementChecker Composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-            working-directory: 'requirement-checker'
