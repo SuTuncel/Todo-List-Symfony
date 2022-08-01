@@ -66,10 +66,6 @@ jobs:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
     
       - name: Run Server
-        uses: Eun/http-server-action@v1.0.3
-        with:
-          port: 8080
-          no-cache: false
         run: http://todoapp.test/index.php/
           
       - name: Run Unit tests
