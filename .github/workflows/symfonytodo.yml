@@ -65,8 +65,13 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
-      - name: Server
-        run: php bin/console server:start
+      - name: Run E2E Tests
+        uses: BerniWittmann/background-server-action@latest
+        with:
+          command: npm run tests
+          build: npm run build
+          start: npm run start
+          wait-on: 'http://todoapp.test/'
           
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
