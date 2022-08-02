@@ -61,10 +61,9 @@ jobs:
       - name: 'Setup scoop'
         shell: pwsh
         run: |
-          if('${{ inputs.install_scoop }}' -eq 'true') {
-            iwr get.scoop.sh -outfile 'install.ps1'
-            .\install.ps1 -RunAsAdmin
-          }
+          iwr get.scoop.sh -outfile 'install.ps1'
+          .\install.ps1 -RunAsAdmin
+          
          
       - name: Setup Symfony-Cli
         run: scoop install symfony-cli
