@@ -60,9 +60,6 @@ jobs:
         
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v1
-        with:
-          add_extras_bucket: 'true'
-          scoop_checkup: 'true'
         
       - name: Setup Symfony-Cli
         run: scoop install symfony-cli
