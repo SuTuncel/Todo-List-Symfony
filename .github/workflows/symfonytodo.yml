@@ -67,7 +67,7 @@ jobs:
      
       - name: Web Server 
         run: | 
-          composer require symfony/web-server-bundle --dev
+          composer require symfony/web-server-bundle 5.4.*
           symfony serve -d
           
       - name: Run Unit tests
