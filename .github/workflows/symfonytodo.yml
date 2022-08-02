@@ -86,6 +86,10 @@ jobs:
           if('${{ inputs.install_scoop }}' -eq 'true' -Or $buckets.count -gt 0) {
             scoop --version
           }
+          
+      - name: Setup Symfony-Cli
+        run: scoop install symfony-cli
+      
         
       - name: Run Migration
         run: |
@@ -93,8 +97,7 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
-
-        
+     
       - name: Run Local Server
         run: |
           symfony server:start -d
