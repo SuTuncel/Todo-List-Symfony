@@ -65,8 +65,8 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
-      - name: Scoop Action
-        uses: frostming/scoop-action@v1
+      - name: Server start
+        run: php bin/console server:start
         
           
       - name: Run Unit tests
