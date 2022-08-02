@@ -64,15 +64,6 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
-          
-      - name: Install Scoop
-        run: |
-          irm get.scoop.sh -outfile 'install.ps1'
-          .\install.ps1 -RunAsAdmin
-        
-          
-      - name: Install Symfony-Cli
-        run: scoop install symfony-cli
     
       - name: Run Local Server
         run: |
