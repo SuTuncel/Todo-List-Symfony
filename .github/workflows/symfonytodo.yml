@@ -59,7 +59,7 @@ jobs:
         uses: ramsey/composer-install@v2
         
       - name: Setup Scoop
-        uses: MinoruSekine/setup-scoop@v1
+      - uses: MinoruSekine/setup-scoop@v1
         
       - name: Setup Symfony-Cli
         run: scoop install symfony-cli
