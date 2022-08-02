@@ -65,8 +65,10 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
     
-      - name: Run Server
-        run: symfony server:start
+      - name: Run Local Server
+        run: |
+          symfony server:start -d
+          symfony open:local 
           
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
