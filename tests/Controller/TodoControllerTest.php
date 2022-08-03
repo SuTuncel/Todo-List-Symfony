@@ -35,7 +35,7 @@ class TodoControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful(); //ok
         $link = $crawler->filter('html a.close:contains("X")')->eq(0)->link();
         $client->click($link);
-        $this->assertEquals(0, $crawler->filter('html a.tit:contains("")')->count());
+        $this->assertGreaterThan(0, $crawler->filter('html a.tit:contains("")')->count());
     }
 
     public function testChangeStatus(){
