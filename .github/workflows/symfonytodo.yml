@@ -66,7 +66,7 @@ jobs:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
       - name: Server start
-        run: php bin/console server:start *:80
+        run: php bin/console server:start 127.0.0.1:8000/
         
           
       - name: Run Unit tests
