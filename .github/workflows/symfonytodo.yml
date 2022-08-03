@@ -58,22 +58,25 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
         
-      - name: Run symfony command
-        uses: nucleos/symfony-console-action@1.0.0
- 
-      - name: Run Migration
+      - name: Setup Symfony Cli
         run: |
-          composer require --dev symfony/orm-pack
-          php bin/console doctrine:schema:update --force || echo "schema update failed"
-        env:
-          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
+          curl -sS https://get.symfony.com/cli/installer | bash
+          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony
         
-      - name: Server start
-        run: php bin/console server:start 127.0.0.1:8000
+ 
+     # - name: Run Migration
+      #  run: |
+       #   composer require --dev symfony/orm-pack
+        #  php bin/console doctrine:schema:update --force || echo "schema update failed"
+        #env:
+         # DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
+        
+      #- name: Server start
+       # run: php bin/console server:start 127.0.0.1:8000
         
           
-      - name: Run Unit tests
-        run: php bin/phpunit tests/TaskTodoTest.php
+      #- name: Run Unit tests
+       # run: php bin/phpunit tests/TaskTodoTest.php
       
       #- name: Run Functional tests
         #run: php bin/phpunit tests/Controller/TodoControllerTest.php
