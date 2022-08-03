@@ -22,7 +22,7 @@ jobs:
         image: mariadb:10.4
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_DATABASE: todoapp
+          MYSQL_DATABASE: todoapp_test
         ports:
         - 3306/tcp
         - 3306:3306
