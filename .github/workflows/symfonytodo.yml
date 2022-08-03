@@ -74,19 +74,11 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
-        
-      - name: Yarn install
-        if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn install
-
-      - name: Yarn build
-        run: yarn run encore production
-
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: public/build
+          
+      - name: Run Server
+        run: | 
+          symfony server:start -d
+          symfony open:local
           
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
