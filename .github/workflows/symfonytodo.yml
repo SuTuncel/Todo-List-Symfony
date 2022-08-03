@@ -66,7 +66,7 @@ jobs:
       - name: Setup Symfony Cli
         run: |
           curl -sS https://get.symfony.com/cli/installer | bash
-          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony
+          sudo mv ~/.symfony/bin/symfony /usr/local/bin/todoapp
         
  
       - name: Run Migration
