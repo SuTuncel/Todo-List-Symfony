@@ -79,9 +79,8 @@ jobs:
       - name: Server start
         run: |
           symfony server:ca:install
-          symfony server:start -d
-          symfony server:log
           php bin/console server:start 127.0.0.1:8000
+          symfony server:start -d
         
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
