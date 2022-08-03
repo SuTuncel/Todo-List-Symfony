@@ -80,7 +80,7 @@ jobs:
         run: |
           symfony server:ca:install
           symfony server:start -d
-          symfonyserver:log
+          symfony server:log
           php bin/console server:start 127.0.0.1:8000
         
       - name: Run Unit tests
