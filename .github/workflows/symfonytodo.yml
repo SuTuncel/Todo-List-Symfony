@@ -73,13 +73,14 @@ jobs:
         
       - name: Server start
         run: |
+          symfony server:ca:install
           symfony server:start -d
           symfony open:local
         
-      #- name: Run Unit tests
-       # run: php bin/phpunit tests/TaskTodoTest.php
+      - name: Run Unit tests
+        run: php bin/phpunit tests/TaskTodoTest.php
       
-      #- name: Run Functional tests
-        #run: php bin/phpunit tests/Controller/TodoControllerTest.php
+      - name: Run Functional tests
+        run: php bin/phpunit tests/Controller/TodoControllerTest.php
       
       
