@@ -13,18 +13,24 @@ class TodoControllerTest extends WebTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+    /*
     public function createClientTask($client, $crawler){
         $repository = self::getContainer()->get(TaskTodoRepository::class);
         $this->assertResponseIsSuccessful();//ok
         $form = $crawler->filter('html button')->form();
         $form['task'] = 'Trial';
         $client->submit($form);
-    }
+    }*/
     public function testCreate()
     {
         $client = static::createClient();
         $crawler = $client->request('POST', '//create');
-        $this->createClientTask($client,$crawler);
+        //$this->createClientTask($client,$crawler);
+        self::getContainer()->get(TaskTodoRepository::class);
+        $this->assertResponseIsSuccessful();//ok
+        $form = $crawler->filter('html button')->form();
+        $form['task'] = 'Trial';
+        $client->submit($form);
         $this->assertGreaterThan(0, $crawler->filter('html a.tit:contains("Trial")')->count());
     }
 
@@ -40,7 +46,12 @@ class TodoControllerTest extends WebTestCase
     public function testChangeStatus(){
         $client = static::createClient();
         $crawler1 = $client->request('POST', '//create');
-        $this->createClientTask($client,$crawler1);
+        //$this->createClientTask($client,$crawler1);
+        self::getContainer()->get(TaskTodoRepository::class);
+        $this->assertResponseIsSuccessful();//ok
+        $form = $crawler1->filter('html button')->form();
+        $form['task'] = 'Trial';
+        $client->submit($form);
         $crawler = $client->request('GET', '//change-status' );
         $this->assertResponseIsSuccessful();
         $link = $crawler->filter('html a.tit:contains("Trial")')->eq(0)->link();
