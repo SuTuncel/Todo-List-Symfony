@@ -22,17 +22,16 @@ jobs:
         image: mariadb:10.4
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_DATABASE: todoapp_test
+          MYSQL_DATABASE: todoapp
         ports:
         - 3306/tcp
-        - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
     
     steps:
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3306 -uroot "todoapp_test"
+          mysql --host 127.0.0.1 --port 3306 -uroot "todoapp"
         
       - name: Checkout
         uses: actions/checkout@v3
@@ -74,7 +73,7 @@ jobs:
           composer require --dev symfony/orm-pack
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
-          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp_test?serverVersion=mariadb-10.4.21
+          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
       - name: Server start
         run: |
