@@ -57,7 +57,10 @@ jobs:
         
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
-         
+        
+      - name: Run symfony command
+        uses: nucleos/symfony-console-action@1.0.0
+ 
       - name: Run Migration
         run: |
           composer require --dev symfony/orm-pack
