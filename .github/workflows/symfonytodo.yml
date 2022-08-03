@@ -27,7 +27,7 @@ jobs:
         #- 3306/tcp
         - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
-    
+      
     steps:
       - name: Verify MySQL connection from host
         run: |
@@ -66,8 +66,7 @@ jobs:
       - name: Setup Symfony Cli
         run: |
           curl -sS https://get.symfony.com/cli/installer | bash
-          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony
-        
+          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony     
  
       - name: Run Migration
         run: |
@@ -76,12 +75,19 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
-      - name: Server start
-        run: |
-          symfony server:ca:install
-          symfony server:start -d
-          symfony open:local
-        
+      - name: Yarn install
+        if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Yarn build
+        run: yarn run encore production
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: public/build
+          
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
       
