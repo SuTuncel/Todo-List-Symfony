@@ -24,7 +24,6 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: todoapp
         ports:
-        #- 3306/tcp
         - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
       
@@ -74,6 +73,14 @@ jobs:
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
+          
+      - name: Run Testing Migration
+        run: | 
+          php bin/console --env=test doctrine:database:create
+          php bin/console --env=test doctrine:schema:create
+        env: 
+          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp_test?serverVersion=mariadb-10.4.21
+        
           
       - name: Run Server
         run: | 
