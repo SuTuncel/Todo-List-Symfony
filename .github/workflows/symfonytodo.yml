@@ -76,8 +76,8 @@ jobs:
           
       - name: Run Testing Migration 
         run: | 
-          php bin/console --env=test doctrine:database:create --force
-          php bin/console --env=test doctrine:schema:create --force
+          php bin/console --env=test doctrine:database:create -c
+          php bin/console --env=test doctrine:schema:create -c
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
 
