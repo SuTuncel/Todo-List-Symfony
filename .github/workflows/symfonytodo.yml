@@ -69,7 +69,7 @@ jobs:
           composer require --dev symfony/orm-pack
           php bin/console doctrine:schema:update --force || echo "schema update failed"
         env:
-          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp_test?serverVersion=mariadb-10.4.21
+          DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
         
       - name: Server start
         run: |
