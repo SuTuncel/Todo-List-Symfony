@@ -45,12 +45,14 @@ jobs:
           tools: composer, phpunit
           extensions: mbstring, xml, ctype, iconv, intl, mysql, dom, filter, json, pdo, pdo_mysql
           
+          
       - name: Check PHP Version
         run: php -v
         
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        
 
       - name: Cache composer dependencies
         uses: actions/cache@v3.0.5
@@ -58,6 +60,7 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
+          
         
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
@@ -65,7 +68,8 @@ jobs:
       - name: Setup Symfony Cli
         run: |
           curl -sS https://get.symfony.com/cli/installer | bash
-          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony     
+          sudo mv ~/.symfony/bin/symfony /usr/local/bin/symfony  
+          
  
       - name: Run Migration
         run: |
@@ -74,20 +78,24 @@ jobs:
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
           
-      - name: Run Testing Migration 
+          
+      - name: Run Migration for Testing 
         run: | 
           php bin/console --env=test doctrine:database:create 
           php bin/console --env=test doctrine:schema:create 
         env:
           DATABASE_URL: mysql://root:@127.0.0.1:3306/todoapp?serverVersion=mariadb-10.4.21
+          
 
       - name: Run Server
         run: | 
           symfony server:start -d
           symfony open:local
           
+          
       - name: Run Unit tests
         run: php bin/phpunit tests/TaskTodoTest.php
+        
       
       - name: Run Functional tests
         run: php bin/phpunit tests/Controller/TodoControllerTest.php
