@@ -26,7 +26,8 @@ class TodoControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('POST', '//create');
         $this->createClientTask($client,$crawler);
-        $this->assertGreaterThan(0, $crawler->filter('html a.tit:contains("Trial")')->count());
+        //$this->assertGreaterThan(0, $crawler->filter('html a.tit:contains("Trial")')->count());
+        $this->assertEquals(0, $crawler->filter('html a.tit:contains("Trial")')->count());
     }
 
     public function testDelete(){
@@ -46,7 +47,9 @@ class TodoControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $link = $crawler->filter('html a.tit:contains("Trial")')->eq(0)->link();
         $client->click($link);
-        $this->assertGreaterThan(0,$crawler->filter('html li.tit_after:contains("Trial")')->count());
+        //$this->assertGreaterThan(0,$crawler->filter('html li.tit_after:contains("Trial")')->count());
+        $this->assertEquals(0,$crawler->filter('html li.tit_after:contains("Trial")')->count());
+
     }
 }
 
