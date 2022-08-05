@@ -21,9 +21,9 @@ jobs:
       - id: triggerjenkinsjob
         uses: mickeygoussetorg/trigger-jenkins-job@v1
         with:
-          jenkins-server: "http://emresarioglu.com.tr:8080/"
+          jenkins-server:
           jenkins-job: "SymfonyTodo"
-          jenkins-username: "elif"
+          jenkins-username:
           jenkins-pat: 
           poll-time: 10
           timeout-value: 600
