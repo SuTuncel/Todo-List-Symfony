@@ -11,4 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v
+
+
+  trigger-a-jenkins-job:
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - id: triggerjenkinsjob
+        uses: mickeygoussetorg/trigger-jenkins-job@v1
+        with:
+          jenkins-server: "http://emresarioglu.com.tr:8080/"
+          jenkins-job: "SymfonyTodo"
+          jenkins-username: "elif"
+          jenkins-pat: 
+          poll-time: 10
+          timeout-value: 600
+          verbose: true
+          
