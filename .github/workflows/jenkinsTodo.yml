@@ -4,4 +4,4 @@ on:
   workflow_run: 
     workflows: ["CI process for Todo-List"]
     types:
-      - completed
+      - completed 
