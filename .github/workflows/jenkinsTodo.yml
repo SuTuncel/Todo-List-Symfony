@@ -14,18 +14,18 @@ jobs:
       - uses: actions/checkout@v
 
 
-  trigger-a-jenkins-job:
-    runs-on: ubuntu-latest
+  #trigger-a-jenkins-job:
+   # runs-on: ubuntu-latest
     
-    steps: 
-      - name: trigger jenkins job
-        uses: mickeygoussetorg/trigger-jenkins-job@v1
-        with:
-          jenkins-server: ${{ secret_JENKINS_SERVER }}
-          jenkins-job: "SymfonyTodo"
-          jenkins-username: ${{ secret_JENKINS_USERNAME }}
-          jenkins-pat: ${{ secret_JENKINS_PAT }}
-          poll-time: 10
-          timeout-value: 600
-          verbose: true
+    #steps: 
+     # - id: triggerjenkinsjob
+      #  uses: mickeygoussetorg/trigger-jenkins-job@v1
+       # with:
+        #  jenkins-server: ${{ secret_JENKINS_SERVER }}
+         # jenkins-job: "SymfonyTodo"
+          #jenkins-username: ${{ secret_JENKINS_USERNAME }}
+         # jenkins-pat: ${{ secret_JENKINS_PAT }}
+         # poll-time: 10
+          #timeout-value: 600
+          #verbose: true
           
