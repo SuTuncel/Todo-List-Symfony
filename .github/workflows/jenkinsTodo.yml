@@ -21,10 +21,10 @@ jobs:
       - id: triggerjenkinsjob
         uses: mickeygoussetorg/trigger-jenkins-job@v1
         with:
-          jenkins-server:
+          jenkins-server: ${{ secret_JENKINS_SERVER }}
           jenkins-job: "SymfonyTodo"
-          jenkins-username:
-          jenkins-pat: 
+          jenkins-username: ${{ secret_JENKINS_USERNAME }}
+          jenkins-pat: ${{ secret_JENKINS_PAT }}
           poll-time: 10
           timeout-value: 600
           verbose: true
