@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps: 
-      - id: triggerjenkinsjob
+      - name: trigger jenkins job
         uses: mickeygoussetorg/trigger-jenkins-job@v1
         with:
           jenkins-server: ${{ secret_JENKINS_SERVER }}
