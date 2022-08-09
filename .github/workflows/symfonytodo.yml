@@ -100,4 +100,16 @@ jobs:
       - name: Run Functional tests
         run: php bin/phpunit tests/Controller/TodoControllerTest.php
       
-      
+  trigger-a-jenkins-job:
+    runs-on: ubuntu-latest
+    steps:
+      - id: triggerjenkinsjob
+        uses: mickeygoussetorg/trigger-jenkins-job@v1
+        with:
+          jenkins-server:  "${{ secret_JENKINS_SERVER }}" # URL of the jenkins server. ex: http://myjenkins.acme.com:8080
+          jenkins-job: "symfonyProject" # The name of the jenkins job to run
+          jenkins-username: ${{ secret_JENKINS_USERNAME }} # user name for accessing jenkins
+          jenkins-pat: ${{ secret_JENKINS_PAT }} # personal Access token for accessing Jenkins
+          poll-time: 10 # how often (seconds) to poll the jenkins server for results
+          timeout-value: 600 # How long (seconds) to poll before timing out the action
+          verbose: true # true/false - turns on extra logging    
