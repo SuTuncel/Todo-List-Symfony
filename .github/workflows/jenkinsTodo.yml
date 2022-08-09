@@ -1,0 +1,7 @@
+name: Jenkins Trigger
+
+on:
+  workflow_run: 
+    workflows: ["CI process for Todo-List"]
+    types:
+      - completed
