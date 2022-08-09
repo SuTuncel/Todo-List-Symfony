@@ -5,3 +5,10 @@ on:
     workflows: ["CI process for Todo-List"]
     types:
       - completed 
+
+jobs: 
+  jenkins:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Trigger Jenkins Job
+      uses: appleboy/jenkins-action@0.0.1
