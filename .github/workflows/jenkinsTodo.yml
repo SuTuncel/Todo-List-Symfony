@@ -9,6 +9,13 @@ on:
 jobs: 
   jenkins:
     runs-on: ubuntu-latest
-    steps: 
-    - name: Trigger Jenkins Job
-      uses: appleboy/jenkins-action@0.0.1
+    steps:
+      - name: Trigger jenkins job
+        uses: jabbukka/jenkins-trigger@main
+        with:
+          url: ${{ secrets.SECRET_JENKINS_SERVER }}
+          job_name: "symfonyProject"
+          user_name: ${{ secrets.SECRET_JENKINS_USERNAME }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          wait: "true"
+          timeout: "1000"
