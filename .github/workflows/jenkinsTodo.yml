@@ -14,7 +14,7 @@ jobs:
         uses: jabbukka/jenkins-trigger@main
         with:
           url: ${{ secrets.SECRET_JENKINS_SERVER }}
-          job_name: "symfonyProject"
+          job_name: "SymfonyTodoPipeline"
           user_name: ${{ secrets.SECRET_JENKINS_USERNAME }}
           api_token: ${{ secrets.JENKINS_TOKEN }}
           wait: "true"
