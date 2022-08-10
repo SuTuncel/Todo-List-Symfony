@@ -18,4 +18,4 @@ jobs:
           user_name: ${{ secrets.SECRET_JENKINS_USERNAME }}
           api_token: ${{ secrets.JENKINS_TOKEN }}
           wait: "true"
-          timeout: "1000"
+          #timeout: "1000"
